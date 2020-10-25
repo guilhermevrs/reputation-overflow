@@ -20,6 +20,12 @@ interface SessionDao {
 
     @Query("DELETE FROM session_db")
     fun deleteAll(): Int
+
+    @Transaction
+    fun replaceSession(session: SessionEntity) {
+        deleteAll()
+        insert(session)
+    }
 }
 
 @Database(entities = [SessionEntity::class], version = 2)
